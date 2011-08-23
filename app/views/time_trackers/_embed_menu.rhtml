@@ -57,3 +57,12 @@
     </span>
   <% end %>
 <% end %>
+
+<% if flash[:error] %>
+  <div class="time-tracker-error-tooltip">
+    <div class="time-tracker-error-stem"></div>
+    <div class="time-tracker-error">
+      <%= flash[:error] %>
+    </div>
+  </div>
+<% end %>
