@@ -23,7 +23,6 @@ class TimeTrackersController < ApplicationController
 
       if @time_tracker.save
         apply_status_transition(@issue) unless Setting.plugin_redmine_time_tracker['status_transitions'] == nil
-        #render_menu
       else
         flash.now[:error] = l(:start_time_tracker_error)
       end
@@ -41,9 +40,7 @@ class TimeTrackersController < ApplicationController
     else
       @time_tracker.started_on = Time.now
       @time_tracker.paused = false
-      if @time_tracker.save
-        #render_menu
-      else
+      unless @time_tracker.save
         flash.now[:error] = l(:resume_time_tracker_error)
       end
       render_menu
@@ -59,9 +56,7 @@ class TimeTrackersController < ApplicationController
     else
       @time_tracker.time_spent = @time_tracker.hours_spent
       @time_tracker.paused = true
-      if @time_tracker.save
-        #render_menu
-      else
+      unless @time_tracker.save
         flash.now[:error] = l(:suspend_time_tracker_error)
       end
       render_menu
