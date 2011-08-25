@@ -33,7 +33,7 @@ Redmine::Plugin.register :redmine_time_tracker do
     :first => true,
     :param => :project_id,
     :if => Proc.new {
-      User.current.allowed_to?({:controller => 'time_trackers', :action => 'render_menu'},nil, :global => true)
+      User.current.logged? and User.current.allowed_to?({:controller => 'time_trackers', :action => 'render_menu'},nil, :global => true)
     }
   }
   
